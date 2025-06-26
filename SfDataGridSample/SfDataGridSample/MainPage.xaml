@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:SfDataGridSample"
+             x:Class="SfDataGridSample.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:EmployeeViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="cellTemplate">
+                <Button Text="Test" />
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid ColumnDefinitions="*,300"
+          RowDefinitions="Auto,Auto">
+        <syncfusion:SfDataGrid x:Name="dataGrid"
+                               Grid.Column="0"
+                               Grid.Row="0"
+                               AllowGroupExpandCollapse="True"
+                               ColumnWidthMode="Auto"
+                               GridLinesVisibility="Both"
+                               HeaderGridLinesVisibility="Both"
+                               AutoGenerateColumnsMode="None"
+                               ItemsSource="{Binding Employees}">
+
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:DataGridNumericColumn MappingName="EmployeeID"
+                                                  HeaderText="Employee ID" />
+                <syncfusion:DataGridTextColumn MappingName="Title"
+                                               HeaderText="Designation" />
+                <syncfusion:DataGridDateColumn MappingName="HireDate"
+                                               HeaderText="Hire Date" />
+                <syncfusion:DataGridTemplateColumn MappingName="Name"
+                                                   HeaderText="Employee Name"
+                                                   CellTemplate="{StaticResource cellTemplate}" />
+
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+
+        <syncfusion:SfDataGrid x:Name="dataGrid1"
+                               Grid.Column="0"
+                               Grid.Row="1"
+                               ItemsSource="{Binding Employees}">
+        </syncfusion:SfDataGrid>
+
+        <VerticalStackLayout Grid.Column="1">
+            <Grid RowDefinitions="80,80">
+                <Button Text="Serialize"
+                        Grid.Row="0"
+                        Margin="0,0,0,20"
+                        WidthRequest="150"
+                        Clicked="Button_Clicked" />
+                <Button Text="Deserialize"
+                        Grid.Row="1"
+                        Margin="0,20,0,0"
+                        WidthRequest="150"
+                        Clicked="Button_Clicked_1" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+
+
+</ContentPage>
